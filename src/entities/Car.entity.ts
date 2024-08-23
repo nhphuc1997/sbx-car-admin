@@ -1,0 +1,56 @@
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { File } from "./File.entity.js";
+
+@Entity('car')
+export class Banner extends File {
+  @PrimaryGeneratedColumn()
+  id: number
+
+  @Column({ nullable: true })
+  manufactureYear: number
+
+  @Column({ nullable: true })
+  subTitle: string
+
+  @Column({ nullable: true })
+  shortTitle: string
+
+  @Column({ nullable: true })
+  price: number
+
+  @Column({ nullable: true })
+  color: string
+
+  @Column({ nullable: true })
+  location: string
+
+  @Column({ nullable: true })
+  seller: string
+
+  @Column({ nullable: true })
+  sellerType: string
+
+  @Column({ nullable: true })
+  exterior: string
+
+  @Column({ nullable: true })
+  interior: string
+
+  @Column({ nullable: true })
+  lot: string
+
+  @Column({ nullable: true })
+  vehicleMake: string
+
+  @Column({ nullable: true })
+  description: string
+
+  @Column({ nullable: true })
+  video: string
+
+  @Column({ nullable: true, default: 0 })
+  auctionViews: number
+
+  @Column({ nullable: true, default: 0 })
+  watching: number
+}
