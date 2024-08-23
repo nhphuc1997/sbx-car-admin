@@ -8,4 +8,7 @@ export class Banner extends File {
 
   @Column({ nullable: true })
   orderNo: number
+
+  @Column({ nullable: true, default: true })
+  active: boolean
 }
