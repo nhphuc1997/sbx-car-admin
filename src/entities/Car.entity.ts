@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Relation } from "typeorm";
 import { File } from "./File.entity.js";
+import { Category } from "./Category.entity.js";
 
 @Entity('car')
 export class Banner extends File {
@@ -53,4 +54,11 @@ export class Banner extends File {
 
   @Column({ nullable: true, default: 0 })
   watching: number
+
+  @ManyToOne(() => Category)
+  @JoinColumn()
+  category: Relation<Category>
+
+  @Column()
+  categoryId: Relation<Category>
 }
