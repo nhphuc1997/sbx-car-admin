@@ -6,6 +6,13 @@ import * as AdminJSTypeorm from '@adminjs/typeorm'
 import AdminJS from 'adminjs'
 import { TypeOrmModule } from '@nestjs/typeorm';
 import componentLoader from './admin/component-loader.js';
+import uploadFeature from '@adminjs/upload';
+import { Banner } from './entities/Banner.entity.js';
+import { Car } from './entities/Car.entity.js';
+import { Category } from './entities/Category.entity.js';
+import { awscredentials } from './aws/index.js';
+import bannerResource from './resources/banner.resource.js';
+import carResource from './resources/car.resource.js';
 
 AdminJS.registerAdapter({
   Resource: AdminJSTypeorm.Resource,
@@ -27,7 +34,11 @@ AdminJS.registerAdapter({
         username: config.get<string>('DATABASE_USER'),
         password: config.get<string>('DATABASE_PASSWORD'),
         database: config.get<string>('DATABASE_NAME'),
-        entities: [],
+        entities: [
+          Banner,
+          Car,
+          Category
+        ],
         synchronize: true,
       })
     }),
@@ -39,7 +50,33 @@ AdminJS.registerAdapter({
             rootPath: '/car/admin',
             loginPath: '/car/admin/login',
             logoutPath: '/car/admin/exit',
-            resources: [],
+            resources: [
+              Category,
+              {
+                resource: Banner,
+                options: bannerResource,
+                features: [
+                  uploadFeature({
+                    componentLoader,
+                    provider: { aws: awscredentials },
+                    validation: { mimeTypes: [] },
+                    properties: { file: 'file', key: 's3Key', bucket: 'bucket', mimeType: 'mime' },
+                  } as any),
+                ],
+              },
+              {
+                resource: Car,
+                options: carResource,
+                features: [
+                  uploadFeature({
+                    componentLoader,
+                    provider: { aws: awscredentials },
+                    validation: { mimeTypes: [] },
+                    properties: { file: 'file', key: 's3Key', bucket: 'bucket', mimeType: 'mime' },
+                  } as any),
+                ],
+              }
+            ],
             branding: {
               companyName: 'SBX Admin',
               logo: '',

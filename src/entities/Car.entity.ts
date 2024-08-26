@@ -3,7 +3,7 @@ import { File } from "./File.entity.js";
 import { Category } from "./Category.entity.js";
 
 @Entity('car')
-export class Banner extends File {
+export class Car extends File {
   @PrimaryGeneratedColumn()
   id: number
 
