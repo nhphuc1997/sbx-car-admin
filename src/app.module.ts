@@ -18,6 +18,7 @@ import fullteriorResource from './resources/fullterior.resource.js';
 import { Exterior } from './entities/Exterior.js';
 import { Mechanical } from './entities/Mechanical.js';
 import { Document } from './entities/Document.js';
+import { Video } from './entities/Video.js';
 
 AdminJS.registerAdapter({
   Resource: AdminJSTypeorm.Resource,
@@ -46,7 +47,8 @@ AdminJS.registerAdapter({
           Interior,
           Exterior,
           Mechanical,
-          Document
+          Document,
+          Video
         ],
         synchronize: true,
       })
@@ -61,6 +63,7 @@ AdminJS.registerAdapter({
             logoutPath: '/car/admin/exit',
             resources: [
               Category,
+              Video,
               {
                 resource: Banner,
                 options: bannerResource,
