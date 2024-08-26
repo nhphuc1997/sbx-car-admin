@@ -1,4 +1,4 @@
-const interiorResource = {
+const fullteriorResource = {
   properties: {
     s3Key: {
       isDisabled: true,
@@ -42,4 +42,4 @@ const interiorResource = {
   },
 }
 
-export default interiorResource;
+export default fullteriorResource;

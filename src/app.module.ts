@@ -14,7 +14,10 @@ import { Category } from './entities/Category.entity.js';
 import { Interior } from './entities/Interior.js';
 import bannerResource from './resources/banner.resource.js';
 import carResource from './resources/car.resource.js';
-import interiorResource from './resources/interior.resource.js';
+import fullteriorResource from './resources/fullterior.resource.js';
+import { Exterior } from './entities/Exterior.js';
+import { Mechanical } from './entities/Mechanical.js';
+import { Document } from './entities/Document.js';
 
 AdminJS.registerAdapter({
   Resource: AdminJSTypeorm.Resource,
@@ -40,7 +43,10 @@ AdminJS.registerAdapter({
           Banner,
           Car,
           Category,
-          Interior
+          Interior,
+          Exterior,
+          Mechanical,
+          Document
         ],
         synchronize: true,
       })
@@ -81,7 +87,43 @@ AdminJS.registerAdapter({
               },
               {
                 resource: Interior,
-                options: interiorResource,
+                options: fullteriorResource,
+                features: [
+                  uploadFeature({
+                    componentLoader,
+                    provider: { aws: awscredentials },
+                    validation: { mimeTypes: [] },
+                    properties: { file: 'file', key: 's3Key', bucket: 'bucket', mimeType: 'mime' },
+                  } as any),
+                ],
+              },
+              {
+                resource: Exterior,
+                options: fullteriorResource,
+                features: [
+                  uploadFeature({
+                    componentLoader,
+                    provider: { aws: awscredentials },
+                    validation: { mimeTypes: [] },
+                    properties: { file: 'file', key: 's3Key', bucket: 'bucket', mimeType: 'mime' },
+                  } as any),
+                ],
+              },
+              {
+                resource: Mechanical,
+                options: fullteriorResource,
+                features: [
+                  uploadFeature({
+                    componentLoader,
+                    provider: { aws: awscredentials },
+                    validation: { mimeTypes: [] },
+                    properties: { file: 'file', key: 's3Key', bucket: 'bucket', mimeType: 'mime' },
+                  } as any),
+                ],
+              },
+              {
+                resource: Document,
+                options: fullteriorResource,
                 features: [
                   uploadFeature({
                     componentLoader,
