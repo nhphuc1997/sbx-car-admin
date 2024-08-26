@@ -8,11 +8,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import componentLoader from './admin/component-loader.js';
 import uploadFeature from '@adminjs/upload';
 import { Banner } from './entities/Banner.entity.js';
+import { awscredentials } from './aws/index.js';
 import { Car } from './entities/Car.entity.js';
 import { Category } from './entities/Category.entity.js';
-import { awscredentials } from './aws/index.js';
+import { Interior } from './entities/Interior.js';
 import bannerResource from './resources/banner.resource.js';
 import carResource from './resources/car.resource.js';
+import interiorResource from './resources/interior.resource.js';
 
 AdminJS.registerAdapter({
   Resource: AdminJSTypeorm.Resource,
@@ -37,7 +39,8 @@ AdminJS.registerAdapter({
         entities: [
           Banner,
           Car,
-          Category
+          Category,
+          Interior
         ],
         synchronize: true,
       })
@@ -75,7 +78,19 @@ AdminJS.registerAdapter({
                     properties: { file: 'file', key: 's3Key', bucket: 'bucket', mimeType: 'mime' },
                   } as any),
                 ],
-              }
+              },
+              {
+                resource: Interior,
+                options: interiorResource,
+                features: [
+                  uploadFeature({
+                    componentLoader,
+                    provider: { aws: awscredentials },
+                    validation: { mimeTypes: [] },
+                    properties: { file: 'file', key: 's3Key', bucket: 'bucket', mimeType: 'mime' },
+                  } as any),
+                ],
+              },
             ],
             branding: {
               companyName: 'SBX Admin',

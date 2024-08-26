@@ -32,12 +32,6 @@ export class Car extends File {
   sellerType: string
 
   @Column({ nullable: true })
-  exterior: string
-
-  @Column({ nullable: true })
-  interior: string
-
-  @Column({ nullable: true })
   lot: string
 
   @Column({ nullable: true })
