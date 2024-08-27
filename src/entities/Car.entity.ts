@@ -38,6 +38,12 @@ export class Car extends File {
   vehicleMake: string
 
   @Column({ nullable: true })
+  interiorName: string
+
+  @Column({ nullable: true })
+  exteriorName: string
+
+  @Column({ nullable: true })
   description: string
 
   @Column({ nullable: true })
