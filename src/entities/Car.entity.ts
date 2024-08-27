@@ -43,7 +43,7 @@ export class Car extends File {
   @Column({ nullable: true })
   exteriorName: string
 
-  @Column({ nullable: true })
+  @Column({ type: "longtext", nullable: true })
   description: string
 
   @Column({ nullable: true })

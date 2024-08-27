@@ -42,7 +42,7 @@ const carResource = {
     price: "currency",
     auctionViews: "currency",
     watching: "currency",
-    description: "richtext",
+    description: "textarea",
     subTitle: { isTitle: true }
   },
 }
