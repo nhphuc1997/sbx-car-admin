@@ -42,7 +42,8 @@ const carResource = {
     price: "currency",
     auctionViews: "currency",
     watching: "currency",
-    description: "richtext"
+    description: "richtext",
+    subTitle: { isTitle: true }
   },
 }
 
