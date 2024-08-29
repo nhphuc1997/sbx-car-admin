@@ -20,6 +20,7 @@ import { Mechanical } from './entities/Mechanical.js';
 import { Document } from './entities/Document.js';
 import { Video } from './entities/Video.js';
 import { Order } from './entities/Order.entity.js';
+import { BookTest } from './entities/BookTest.entity.js';
 
 AdminJS.registerAdapter({
   Resource: AdminJSTypeorm.Resource,
@@ -50,7 +51,8 @@ AdminJS.registerAdapter({
           Mechanical,
           Document,
           Video,
-          Order
+          Order,
+          BookTest
         ],
         synchronize: true,
       })
@@ -67,6 +69,7 @@ AdminJS.registerAdapter({
               Category,
               Video,
               Order,
+              BookTest,
               {
                 resource: Banner,
                 options: bannerResource,
