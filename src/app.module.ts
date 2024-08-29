@@ -62,9 +62,9 @@ AdminJS.registerAdapter({
         return {
           adminJsOptions: {
             componentLoader,
-            rootPath: '/car/admin',
-            loginPath: '/car/admin/login',
-            logoutPath: '/car/admin/exit',
+            rootPath: '/sbx-car/admin',
+            loginPath: '/sbx-car/admin/login',
+            logoutPath: '/sbx-car/admin/exit',
             resources: [
               Category,
               Video,
