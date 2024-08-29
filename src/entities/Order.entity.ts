@@ -11,6 +11,9 @@ export class Order extends Base {
   user: string
 
   @Column()
+  phoneNumber: string
+
+  @Column()
   code: string
 
   @ManyToOne(() => Car)
