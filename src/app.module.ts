@@ -1,12 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Module } from '@nestjs/common';
 import { AdminModule } from '@adminjs/nestjs';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import provider from './admin/auth-provider.js';
-import * as AdminJSTypeorm from '@adminjs/typeorm'
-import AdminJS from 'adminjs'
+import * as AdminJSTypeorm from '@adminjs/typeorm';
+import AdminJS from 'adminjs';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import componentLoader from './admin/component-loader.js';
 import uploadFeature from '@adminjs/upload';
+
+import componentLoader from './admin/component-loader.js';
+import provider from './admin/auth-provider.js';
 import { Banner } from './entities/Banner.entity.js';
 import { awscredentials } from './aws/index.js';
 import { Car } from './entities/Car.entity.js';
@@ -25,7 +27,7 @@ import { BookTest } from './entities/BookTest.entity.js';
 AdminJS.registerAdapter({
   Resource: AdminJSTypeorm.Resource,
   Database: AdminJSTypeorm.Database,
-})
+});
 
 @Module({
   imports: [
@@ -52,114 +54,124 @@ AdminJS.registerAdapter({
           Document,
           Video,
           Order,
-          BookTest
+          BookTest,
         ],
         synchronize: true,
-      })
+      }),
     }),
     AdminModule.createAdminAsync({
-      useFactory: async () => {
-        return {
-          adminJsOptions: {
-            componentLoader,
-            rootPath: '/sbx-car/admin',
-            loginPath: '/sbx-car/admin/login',
-            logoutPath: '/sbx-car/admin/exit',
-            resources: [
-              Category,
-              Video,
-              Order,
-              BookTest,
-              {
-                resource: Banner,
-                options: bannerResource,
-                features: [
-                  uploadFeature({
-                    componentLoader,
-                    provider: { aws: awscredentials },
-                    validation: { mimeTypes: [] },
-                    properties: { file: 'file', key: 's3Key', bucket: 'bucket', mimeType: 'mime' },
-                  } as any),
-                ],
-              },
-              {
-                resource: Car,
-                options: carResource,
-                features: [
-                  uploadFeature({
-                    componentLoader,
-                    provider: { aws: awscredentials },
-                    validation: { mimeTypes: [] },
-                    properties: { file: 'file', key: 's3Key', bucket: 'bucket', mimeType: 'mime' },
-                  } as any),
-                ],
-              },
-              {
-                resource: Interior,
-                options: fullteriorResource,
-                features: [
-                  uploadFeature({
-                    componentLoader,
-                    provider: { aws: awscredentials },
-                    validation: { mimeTypes: [] },
-                    properties: { file: 'file', key: 's3Key', bucket: 'bucket', mimeType: 'mime' },
-                  } as any),
-                ],
-              },
-              {
-                resource: Exterior,
-                options: fullteriorResource,
-                features: [
-                  uploadFeature({
-                    componentLoader,
-                    provider: { aws: awscredentials },
-                    validation: { mimeTypes: [] },
-                    properties: { file: 'file', key: 's3Key', bucket: 'bucket', mimeType: 'mime' },
-                  } as any),
-                ],
-              },
-              {
-                resource: Mechanical,
-                options: fullteriorResource,
-                features: [
-                  uploadFeature({
-                    componentLoader,
-                    provider: { aws: awscredentials },
-                    validation: { mimeTypes: [] },
-                    properties: { file: 'file', key: 's3Key', bucket: 'bucket', mimeType: 'mime' },
-                  } as any),
-                ],
-              },
-              {
-                resource: Document,
-                options: fullteriorResource,
-                features: [
-                  uploadFeature({
-                    componentLoader,
-                    provider: { aws: awscredentials },
-                    validation: { mimeTypes: [] },
-                    properties: { file: 'file', key: 's3Key', bucket: 'bucket', mimeType: 'mime' },
-                  } as any),
-                ],
-              },
-            ],
-            branding: {
-              companyName: 'SBX Admin',
-              logo: '',
+      useFactory: async () => ({
+        adminJsOptions: {
+          componentLoader,
+          rootPath: '/sbx-car/admin',
+          loginPath: '/sbx-car/admin/login',
+          logoutPath: '/sbx-car/admin/exit',
+          resources: [
+            Category,
+            Video,
+            Order,
+            BookTest,
+            {
+              resource: Banner,
+              options: bannerResource,
+              features: [
+                uploadFeature({
+                  componentLoader,
+                  provider: { aws: awscredentials },
+                  validation: { mimeTypes: [] },
+                  properties: {
+                    file: 'file', key: 's3Key', bucket: 'bucket', mimeType: 'mime',
+                  },
+                } as any),
+              ],
             },
+            {
+              resource: Car,
+              options: carResource,
+              features: [
+                uploadFeature({
+                  componentLoader,
+                  provider: { aws: awscredentials },
+                  validation: { mimeTypes: [] },
+                  properties: {
+                    file: 'file', key: 's3Key', bucket: 'bucket', mimeType: 'mime',
+                  },
+                } as any),
+              ],
+            },
+            {
+              resource: Interior,
+              options: fullteriorResource,
+              features: [
+                uploadFeature({
+                  componentLoader,
+                  provider: { aws: awscredentials },
+                  validation: { mimeTypes: [] },
+                  properties: {
+                    file: 'file', key: 's3Key', bucket: 'bucket', mimeType: 'mime',
+                  },
+                } as any),
+              ],
+            },
+            {
+              resource: Exterior,
+              options: fullteriorResource,
+              features: [
+                uploadFeature({
+                  componentLoader,
+                  provider: { aws: awscredentials },
+                  validation: { mimeTypes: [] },
+                  properties: {
+                    file: 'file', key: 's3Key', bucket: 'bucket', mimeType: 'mime',
+                  },
+                } as any),
+              ],
+            },
+            {
+              resource: Mechanical,
+              options: fullteriorResource,
+              features: [
+                uploadFeature({
+                  componentLoader,
+                  provider: { aws: awscredentials },
+                  validation: { mimeTypes: [] },
+                  properties: {
+                    file: 'file', key: 's3Key', bucket: 'bucket', mimeType: 'mime',
+                  },
+                } as any),
+              ],
+            },
+            {
+              resource: Document,
+              options: fullteriorResource,
+              features: [
+                uploadFeature({
+                  componentLoader,
+                  provider: { aws: awscredentials },
+                  validation: { mimeTypes: [] },
+                  properties: {
+                    file: 'file', key: 's3Key', bucket: 'bucket', mimeType: 'mime',
+                  },
+                } as any),
+              ],
+            },
+          ],
+          branding: {
+            companyName: 'SBX Admin',
+            logo: '',
           },
-          auth: {
-            provider,
-            cookiePassword: process.env.COOKIE_SECRET,
-            cookieName: 'adminjs',
-          },
-          sessionOptions: {
-            resave: true,
-            saveUninitialized: true,
-            secret: process.env.COOKIE_SECRET,
-          }
-        };
-      },
+        },
+        auth: {
+          provider,
+          cookiePassword: process.env.COOKIE_SECRET,
+          cookieName: 'adminjs',
+        },
+        sessionOptions: {
+          resave: true,
+          saveUninitialized: true,
+          secret: process.env.COOKIE_SECRET,
+        },
+      }),
     }),
   ],
 })
