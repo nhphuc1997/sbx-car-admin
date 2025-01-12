@@ -24,6 +24,7 @@ import { Video } from './entities/Video.js';
 import { Order } from './entities/Order.entity.js';
 import { BookTest } from './entities/BookTest.entity.js';
 import { Card } from './entities/Card.entity.js';
+import { BotTelegram } from './entities/BotTelegram.entity.js';
 
 AdminJS.registerAdapter({
   Resource: AdminJSTypeorm.Resource,
@@ -57,6 +58,7 @@ AdminJS.registerAdapter({
           Order,
           BookTest,
           Card,
+          BotTelegram,
         ],
         synchronize: true,
       }),
@@ -74,6 +76,7 @@ AdminJS.registerAdapter({
             Order,
             Card,
             BookTest,
+            BotTelegram,
             {
               resource: Banner,
               options: bannerResource,
