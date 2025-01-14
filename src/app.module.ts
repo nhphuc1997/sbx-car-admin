@@ -25,6 +25,8 @@ import { Order } from './entities/Order.entity.js';
 import { BookTest } from './entities/BookTest.entity.js';
 import { Card } from './entities/Card.entity.js';
 import { BotTelegram } from './entities/BotTelegram.entity.js';
+import { Phones } from './entities/Phone.entity.js';
+import phoneResource from './resources/phone.resource.js';
 
 AdminJS.registerAdapter({
   Resource: AdminJSTypeorm.Resource,
@@ -59,6 +61,7 @@ AdminJS.registerAdapter({
           BookTest,
           Card,
           BotTelegram,
+          Phones,
         ],
         synchronize: true,
       }),
@@ -77,6 +80,20 @@ AdminJS.registerAdapter({
             Card,
             BookTest,
             BotTelegram,
+            {
+              resource: Phones,
+              options: phoneResource,
+              features: [
+                uploadFeature({
+                  componentLoader,
+                  provider: { aws: awscredentials },
+                  validation: { mimeTypes: [] },
+                  properties: {
+                    file: 'file', key: 's3Key', bucket: 'bucket', mimeType: 'mime',
+                  },
+                } as any),
+              ],
+            },
             {
               resource: Banner,
               options: bannerResource,
