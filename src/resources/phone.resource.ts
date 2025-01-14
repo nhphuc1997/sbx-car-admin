@@ -11,6 +11,15 @@ const phoneResource = {
         { label: 'Realme', value: 'Realme' },
       ],
     },
+    color: {
+      availableValues: [
+        { label: 'Red', value: 'red' },
+        { label: 'Blue', value: 'blue' },
+        { label: 'Green', value: 'green' },
+        { label: 'Black', value: 'black' },
+        { label: 'Another', value: 'another' },
+      ],
+    },
     s3Key: {
       isDisabled: true,
       isVisible: {

@@ -24,4 +24,7 @@ export class Phones extends File {
 
   @Column()
   description: string;
+
+  @Column()
+  color: string;
 }
